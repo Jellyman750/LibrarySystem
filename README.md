@@ -1,149 +1,111 @@
-Library Management System (C# Console Application)
+# Library Management System (C# Console Application)
 
-A structured and secure Library Management System built using C#, applying the MVC architecture, ADO.NET, and SHA-256 password hashing. The system supports full CRUD operations, role-based authentication, and book loan management.
+### A structured and secure Library Management System built using C#, following the MVC architecture, ADO.NET, and SHA-256 password hashing.The system supports full CRUD operations, role-based authentication, and book loan management.
 
-🧱 Project Structure (MVC)
-LibrarySystem/
+## 🧱 Project Structure (MVC)
+``` LibrarySystem/
 │
-├── Models/                 # Entity Models
+├── Models/                 
 │   ├── Member.cs
 │   ├── Book.cs
 │   └── Loan.cs
 │
-├── DataAccess/             # Data Access Layer
+├── DataAccess/             
 │   └── DatabaseHelper.cs
 │
-├── Controllers/            # Business Logic Layer
+├── Controllers/            
 │   ├── AuthenticationController.cs
 │   └── MainController.cs
 │
-├── Views/                  # Presentation Layer
+├── Views/                  
 │   ├── LoginView.cs
 │   ├── AdminView.cs
 │   ├── MemberView.cs
 │   └── ViewFunctions.cs
 │
-└── Program.cs              # Application Entry Point
+└── Program.cs
+``` 
+## 🔒 Security
 
-🔒 Security
+```The system uses SHA-256 hashing to protect user passwords.```
+Benefits:
 
-The system uses SHA-256 hashing to protect user passwords.
+- Passwords are never stored in plain text
+- One-way cryptographic hashing
+- Prevents credential exposure
+- Safe and secure for storing in SQL Server
 
-Benefits
-
-Passwords are never stored in plain text
-
-One-way cryptographic hashing
-
-Prevents credential exposure
-
-Safe for storing in SQL Server
-
-👥 Default Login Credentials
-Admin
-
-Username: admin
-
-Password: admin123
-
-Role: Admin
-
+## 👥 Default Login Credentials
+- Admin
+- Username: admin
+- Password: admin123
+- Role: Admin
+```
 Members
-Username	Password	Role
-john	pass123	Member
-sarah	pass123	Member
-🗄️ Database Setup
+Username   Password   Role
+--------------------------------
+john       pass123    Member
+sarah      pass123    Member
+```
+## 🗄️ Database Setup
 
-Database: LibrarySystem
-Connection String:
+- Database Name: LibrarySystem
+- Connection String:
+- Server=(localdb)\MSSQLLocalDB;Database=LibrarySystem;Integrated Security=true
 
-Server=(localdb)\MSSQLLocalDB;Database=LibrarySystem;Integrated Security=true
 
-Required Tables
+### Required Tables:
+- Members
+- Books
+- Loans
 
-Members
+(Your SQL script already includes the required schema.)
 
-Books
+## 🚀 Installation & Setup
+- Requirements
+- Visual Studio 2019+
+- .NET Framework 4.7.2+
+- SQL Server (LocalDB / Express)
+- Steps
+- Clone the repository
+- Open LibrarySystem.sln
+- Create the LibrarySystem database
+- Run the SQL setup script in SSMS
+- Verify the connection string in DatabaseHelper.cs
+- Build & Run the application
 
-Loans
+### 📋 Features
+## 🔐 Authentication
+- SHA-256 password hashing
+- Role-based access control
+- Secure login validation
 
-(Your script already includes these—ideal for copy/paste into SSMS.)
+## 👨‍💼 Admin Capabilities
+-Add, update, delete books
+-View all books
+-View books grouped by genre (LINQ)
+-View all loan transactions
 
-🚀 Installation & Setup
-Requirements
+## 👤 Member Capabilities
+-View available books
+-Borrow books (14-day due date)
+-Return borrowed books
+-View personal loan history
 
-Visual Studio 2019+
+## 🛠️ Key Technologies Used
+- C# (Console Application)
+- MVC Architecture
+- OOP Principles
+- Encapsulation
+- Inheritance
+- Polymorphism
+- ADO.NET (SQL connections, queries, transactions)
+- SQL Server (LocalDB)
+- LINQ (filtering, grouping, sorting)
+- SHA-256 hashing
 
-.NET Framework 4.7.2+
-
-SQL Server (LocalDB/Express)
-
-Steps
-
-Clone the repository
-
-Open LibrarySystem.sln
-
-Create the LibrarySystem database
-
-Run the SQL setup script
-
-Update/verify connection string
-
-Build → Run the application
-
-📋 Features
-🔐 Authentication
-
-SHA-256 password hashing
-
-Role-based access (Admin / Member)
-
-Secure login validation
-
-👨‍💼 Admin Capabilities
-
-Add, update, delete books
-
-View all books
-
-View grouped books (by genre using LINQ)
-
-View all loan transactions
-
-👤 Member Capabilities
-
-View available books
-
-Borrow books (14-day due date)
-
-Return borrowed books
-
-View personal loan history
-
-🛠️ Key Technologies Used
-
-C# (Console Application)
-
-MVC Architecture
-
-OOP Principles
-
-Encapsulation
-
-Inheritance
-
-Polymorphism
-
-ADO.NET (SQL connections, queries, transactions)
-
-SQL Server (LocalDB)
-
-LINQ (filtering, grouping, ordering)
-
-SHA-256 hashing
-
-📊 Example: LINQ Grouping (Books by Genre)
+## 📊 Example: LINQ Grouping
+```
 public Dictionary<string, List<Book>> GetBooksGroupedByGenre()
 {
     return dataAccess.GetAllBooks()
@@ -151,61 +113,38 @@ public Dictionary<string, List<Book>> GetBooksGroupedByGenre()
         .OrderBy(g => g.Key)
         .ToDictionary(g => g.Key, g => g.ToList());
 }
-
-🔄 Application Flow (Simplified)
-Login
-
-Enter credentials
-
-Password hashed with SHA-256
-
-Compare with stored hash
-
-Load Admin or Member menu
+```
+## 🔄 Application Flow
+-Login
+-Enter credentials
+-Password hashed using SHA-256
+-Hash compared with stored value
+-Load Admin or Member menu
 
 Borrowing
-
 View available books
-
-Select book
-
-Create loan record
-
-Mark book as borrowed
+→ Select book
+→ Record loan
+→ Mark book as borrowed
 
 Returning
+View user's loans
+→ Select book
+→ Update return date
+→ Mark book as available
 
-View user loans
+## 🐛 Troubleshooting
+- Database Not Connecting
+- Ensure SQL Server is running
+- Verify (localdb)\MSSQLLocalDB
+- Check if the database exists
 
-Select book
+## 👨‍💻 Author
 
-Update return date
+- C# Console Application Project
+- Developed for Software Engineering coursework
+- Built using Visual Studio 2022, .NET Framework 4.7.2
 
-Mark book as available
+##📄 License
 
-🐛 Troubleshooting
-Database Not Connecting
-
-Ensure SQL Server is running
-
-Verify (localdb)\MSSQLLocalDB
-
-Make sure the database exists
-
-Login Failing
-
-Re-check default credentials
-
-Ensure hashed passwords exist in the DB
-
-👨‍💻 Author
-
-C# Console Application Project
-
-Created as part of Software Engineering coursework
-
-Built with Visual Studio 2022, .NET Framework 4.7.2
-
-📄 License
-
-This is an academic project intended for educational use.
+- This project is for academic and educational use.
